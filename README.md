@@ -4,9 +4,22 @@
 
 Este proyecto es un sistema integral de gestión de citas médicas desarrollado con React (Frontend) y Node.js/Express (Backend).
 
-## Guía de Instalación para Colaboradores
+---
 
-Para que un compañero pueda probar el proyecto en su propia máquina (Antigravity u otro entorno local), debe seguir estos pasos:
+## ⚡ Vista Previa y Modo Demo
+
+Para facilitar la evaluación del proyecto sin necesidad de configurar una base de datos local, se ha habilitado una **[Demo en Vivo](https://neo-sisol-react.vercel.app)**.
+
+Al abrir el modal de **Iniciar Sesión**, puedes usar los botones de **Acceso Rápido Demo** para ingresar instantáneamente con datos simulados y persistentes bajo tres roles:
+*   👤 **Paciente**: Permite ver citas pasadas y futuras, agendar nuevas citas (con simulación de pasarela de pagos) y descargar PDFs.
+*   🩺 **Médico**: Permite gestionar la agenda del día, registrar diagnósticos, recetas médicas, signos vitales de triaje y subir archivos.
+*   ⚙️ **Administrador**: Permite gestionar y editar el catálogo de médicos, especialidades y servicios de la clínica.
+
+---
+
+## Guía de Instalación Local
+
+Si deseas ejecutar el proyecto de forma local con la base de datos conectada, sigue estos pasos:
 
 ### 1. Requisitos Previos
 
@@ -17,33 +30,27 @@ Para que un compañero pueda probar el proyecto en su propia máquina (Antigravi
 
 1.  **Clonar el repositorio:**
     ```bash
-    git clone <url-del-repositorio>
-    cd "neo sisol"
+    git clone https://github.com/Dreyeles/neo_sisol_react.git
+    cd neo_sisol_react
     ```
 
-2.  **Instalar dependencias del Frontend (desde la raíz):**
+2.  **Instalar todas las dependencias (Frontend y Backend):**
+    Ejecuta el siguiente comando en la raíz del proyecto. Este instalará también los paquetes del backend de forma automática:
     ```bash
     npm install
-    ```
-
-3.  **Instalar dependencias del Backend:**
-    ```bash
-    cd backend
-    npm install
-    cd ..
     ```
 
 ### 3. Configuración de la Base de Datos
 
-Como la base de datos es local, cada compañero **debe ejecutar los scripts en su propio Workbench**:
+Como la base de datos es local, debes ejecutar los scripts en tu propio Workbench en el siguiente orden:
 
 1.  **Crear la base de datos:** Ejecuta el archivo `init-database.sql` que está en la raíz del proyecto.
 2.  **Crear el esquema:** Ejecuta el archivo `database/schema.sql`.
-3.  **Cargar datos iniciales (Seeds):** Ejecuta los scripts en la carpeta `database/` en el siguiente orden:
-    - `populate-especialidades.sql`
-    - `seed_medicos.sql`
-    - `seed_disponibilidades.sql`
-    - `create_admin.sql` (para tener acceso de administrador)
+3.  **Cargar datos iniciales (Seeds):** Ejecuta los scripts en la carpeta `database/` en este orden:
+    *   `populate-especialidades.sql`
+    *   `seed_medicos.sql`
+    *   `seed_disponibilidades.sql`
+    *   `create_admin.sql` (para tener acceso de administrador)
 
 ### 4. Variables de Entorno
 
@@ -60,10 +67,10 @@ En la carpeta `backend/`, crea un archivo llamado `.env` basándote en el archiv
 Desde la **carpeta raíz**, ejecuta:
 
 ```bash
-npm start
+npm run dev:all
 ```
 
-Esto iniciará simultáneamente el frontend (`http://localhost:3000`) y el backend (`http://localhost:5000`).
+Esto iniciará simultáneamente el servidor de desarrollo del frontend (`http://localhost:3000`) y el servidor del backend (`http://localhost:5000`).
 
 ---
 
