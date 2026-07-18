@@ -75,3 +75,16 @@ Esto iniciará simultáneamente el frontend (`http://localhost:3000`) y el backe
 
 Una vez iniciado el servidor, puedes probar la conexión a la base de datos en:
 `http://localhost:5000/api/test-db`
+
+---
+
+## 👨‍💻 Autor / Desarrollador
+
+Este sitio web fue diseñado, desarrollado y optimizado de forma integral por:
+
+*   **Nombre:** Drey E. Aymituma Julca
+*   **Rol Profesional:** Desarrollador Full Stack (Frontend, Backend & Bases de Datos)
+*   **LinkedIn:** [drey-aymituma-b2320a207](https://www.linkedin.com/in/drey-aymituma-b2320a207)
+*   **GitHub:** [@Dreyeles](https://github.com/Dreyeles)
+*   **Contacto:** drewgamer681@gmail.com
+
