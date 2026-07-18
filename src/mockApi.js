@@ -1,15 +1,11 @@
 // Mock API Interceptor for Demo Mode
 // Intercepts global window.fetch calls to mock the backend completely.
 
-// Activate if demoMode is set in localStorage, VITE_USE_MOCKS env is set, or if "?demo=true" is in the URL.
-const isDemoMode = localStorage.getItem('demoMode') === 'true'
-  || (typeof window !== 'undefined' && window.location.search.includes('demo=true'))
-  || (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_USE_MOCKS === 'true');
-
-if (isDemoMode) {
-  localStorage.setItem('demoMode', 'true');
-  console.log('%c[Modo Demo Activo]: Las llamadas al servidor están siendo interceptadas.', 'color: #0ea5e9; font-weight: bold; font-size: 1.1em;');
-}
+const checkDemoMode = () => {
+  return localStorage.getItem('demoMode') === 'true'
+    || (typeof window !== 'undefined' && window.location.search.includes('demo=true'))
+    || (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_USE_MOCKS === 'true');
+};
 
 // -------------------------------------------------------------
 // BASE DE DATOS EN MEMORIA (LOCALSTORAGE PARA PERSISTENCIA)
@@ -129,8 +125,8 @@ const INITIAL_ARCHIVOS = [
   { id_archivo: 1, id_paciente: 1, nombre_archivo: 'electrocardiograma_preventivo.pdf', fecha_subida: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(), tamaño_kb: 245, url: '#' }
 ];
 
-// Inicializar base de datos en localStorage
-if (isDemoMode) {
+// Inicializar base de datos en localStorage dinámicamente
+const checkAndInitializeDemoDb = () => {
   if (!localStorage.getItem('demo_especialidades')) setLocalStorageJSON('demo_especialidades', INITIAL_ESPECIALIDADES);
   if (!localStorage.getItem('demo_medicos')) setLocalStorageJSON('demo_medicos', INITIAL_MEDICOS);
   if (!localStorage.getItem('demo_servicios')) setLocalStorageJSON('demo_servicios', INITIAL_SERVICIOS);
@@ -138,15 +134,16 @@ if (isDemoMode) {
   if (!localStorage.getItem('demo_citas')) setLocalStorageJSON('demo_citas', INITIAL_CITAS);
   if (!localStorage.getItem('demo_atenciones')) setLocalStorageJSON('demo_atenciones', INITIAL_ATENCIONES);
   if (!localStorage.getItem('demo_archivos')) setLocalStorageJSON('demo_archivos', INITIAL_ARCHIVOS);
-}
+};
 
 // -------------------------------------------------------------
 // INTERCEPTOR GLOBAL DE FETCH
 // -------------------------------------------------------------
-if (isDemoMode) {
-  const originalFetch = window.fetch;
+const originalFetch = window.fetch;
 
-  window.fetch = async (input, init) => {
+window.fetch = async (input, init) => {
+  if (checkDemoMode()) {
+    checkAndInitializeDemoDb();
     const url = typeof input === 'string' ? input : input.url;
     const method = (init && init.method || 'GET').toUpperCase();
 
@@ -500,4 +497,3 @@ if (isDemoMode) {
 
     return originalFetch(input, init);
   };
-}
