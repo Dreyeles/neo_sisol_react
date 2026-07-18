@@ -316,3 +316,62 @@
 .password-toggle:hover {
   color: #2d3748;
 }
+
+/* Demo Login Section */
+.demo-login-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0 16px 0;
+  font-size: 13px;
+  color: #718096;
+}
+
+.demo-login-divider::before,
+.demo-login-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.demo-login-divider:not(:empty)::before {
+  margin-right: .5em;
+}
+
+.demo-login-divider:not(:empty)::after {
+  margin-left: .5em;
+}
+
+.demo-login-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.demo-btn {
+  padding: 10px 16px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.demo-btn:hover {
+  background: #f1f5f9;
+  border-color: #00A39C;
+  color: #00A39C;
+  transform: translateY(-1px);
+}
+
+.demo-btn:active {
+  transform: translateY(0);
+}

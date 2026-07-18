@@ -32,3 +32,68 @@ body.no-scroll {
   overflow: hidden !important;
   height: 100% !important;
 }
+
+/* Glassmorphism Demo Banner */
+.demo-banner {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.85); /* Slate 900 */
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  padding: 8px 16px 8px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 10000;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  animation: bannerSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1), bannerPulse 3s infinite ease-in-out;
+  color: #f1f5f9;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+@keyframes bannerSlideIn {
+  from {
+    transform: translate(-50%, 50px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes bannerPulse {
+  0%, 100% {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    border-color: rgba(0, 163, 156, 0.5);
+  }
+}
+
+.demo-banner-btn {
+  background: linear-gradient(135deg, #00A39C 0%, #008B85 100%);
+  border: none;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.demo-banner-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(0, 163, 156, 0.4);
+}
+
+.demo-banner-btn:active {
+  transform: scale(0.95);
+}

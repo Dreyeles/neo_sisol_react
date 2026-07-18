@@ -53,8 +53,56 @@ const Login = ({ isOpen = false, onClose = () => { }, onSwitchToRegister, onLogi
       newErrors.password = 'La contraseña debe tener al menos 6 caracteres';
     }
 
-    setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
+  };
+
+  const handleQuickDemoLogin = async (role) => {
+    setIsLoading(true);
+    localStorage.setItem('demoMode', 'true');
+    let email = 'paciente@demo.com';
+    if (role === 'doctor') email = 'medico@demo.com';
+    if (role === 'admin') email = 'admin@demo.com';
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          password: '123'
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.status === 'OK') {
+        const userData = data.data;
+        const adaptedUser = {
+          email: userData.email,
+          nombre: userData.nombres || userData.nombre || 'Usuario',
+          role: userData.tipo_usuario === 'medico' ? 'doctor' : (userData.tipo_usuario === 'admin' || userData.tipo_usuario === 'administrativo') ? 'admin' : 'patient',
+          id: userData.id_usuario,
+          id_paciente: userData.id_paciente,
+          id_medico: userData.id_medico,
+          id_administrativo: userData.id_personal_administrativo,
+          ...userData
+        };
+
+        console.log('Login exitoso (Demo):', adaptedUser);
+
+        if (onLoginSuccess) {
+          onLoginSuccess(adaptedUser);
+        }
+        onClose();
+      }
+    } catch (error) {
+      console.error('Error en el login demo:', error);
+      alert('Error al iniciar modo demo.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -198,6 +246,37 @@ const Login = ({ isOpen = false, onClose = () => { }, onSwitchToRegister, onLogi
               {isLoading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
             </button>
           </form>
+
+          <div className="demo-login-divider">
+            <span>O ingresa en Modo Demo (Sin servidor)</span>
+          </div>
+
+          <div className="demo-login-buttons">
+            <button
+              type="button"
+              className="demo-btn"
+              onClick={() => handleQuickDemoLogin('patient')}
+              disabled={isLoading}
+            >
+              👤 Paciente Demo
+            </button>
+            <button
+              type="button"
+              className="demo-btn"
+              onClick={() => handleQuickDemoLogin('doctor')}
+              disabled={isLoading}
+            >
+              🩺 Médico Demo
+            </button>
+            <button
+              type="button"
+              className="demo-btn"
+              onClick={() => handleQuickDemoLogin('admin')}
+              disabled={isLoading}
+            >
+              ⚙️ Admin Demo
+            </button>
+          </div>
 
           <div className="login-footer">
             <p>¿No tienes una cuenta? <a href="#" onClick={(e) => {
