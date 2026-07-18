@@ -1,5 +1,7 @@
 # SISOL - Sistema de Citas Médicas
 
+[**Ver Aplicación en Vivo (Modo Demo)**](https://neo-sisol-react.vercel.app)
+
 Este proyecto es un sistema integral de gestión de citas médicas desarrollado con React (Frontend) y Node.js/Express (Backend).
 
 ## Guía de Instalación para Colaboradores
