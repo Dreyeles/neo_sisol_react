@@ -2,7 +2,7 @@
 
 Este proyecto es un sistema integral de gestión de citas médicas desarrollado con React (Frontend) y Node.js/Express (Backend).
 
-## 🚀 Guía de Instalación para Colaboradores
+## Guía de Instalación para Colaboradores
 
 Para que un compañero pueda probar el proyecto en su propia máquina (Antigravity u otro entorno local), debe seguir estos pasos:
 
@@ -31,7 +31,7 @@ Para que un compañero pueda probar el proyecto en su propia máquina (Antigravi
     cd ..
     ```
 
-### 3. Configuración de la Base de Datos 🗄️
+### 3. Configuración de la Base de Datos
 
 Como la base de datos es local, cada compañero **debe ejecutar los scripts en su propio Workbench**:
 
@@ -65,20 +65,20 @@ Esto iniciará simultáneamente el frontend (`http://localhost:3000`) y el backe
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 - **Frontend:** React 18, Vite, Lucide React, jspdf.
 - **Backend:** Node.js, Express, MySQL2.
 - **Herramientas:** Concurrently (para ejecución simultánea).
 
-## 📊 Verificación de Conexión
+## Verificación de Conexión
 
 Una vez iniciado el servidor, puedes probar la conexión a la base de datos en:
 `http://localhost:5000/api/test-db`
 
 ---
 
-## 👨‍💻 Autor / Desarrollador
+## Autor / Desarrollador
 
 Este sitio web fue diseñado, desarrollado y optimizado de forma integral por:
 
